@@ -1,0 +1,9 @@
+blur: 13
+highThresh:
+- 95
+- 255
+- 243
+lowThresh:
+- 66
+- 222
+- 21
