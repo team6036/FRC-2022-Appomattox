@@ -6,9 +6,7 @@ import com.peninsula.frc2022.robot.ReadOnly;
 import com.peninsula.frc2022.robot.RobotState;
 import com.peninsula.frc2022.subsystems.Swerve;
 
-/**
- * Points drivetrain at a vision target
- */
+/** Points drivetrain at a vision target */
 public class AlignRoutine extends TimeoutRoutineBase {
 
   public AlignRoutine(double timeout) {

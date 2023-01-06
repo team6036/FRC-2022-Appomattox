@@ -12,13 +12,10 @@ public class IndexerRoutine extends TimeoutRoutineBase {
   }
 
   @Override
-  public void update(@ReadOnly Commands commands, @ReadOnly RobotState state) {
-
-  }
+  public void update(@ReadOnly Commands commands, @ReadOnly RobotState state) {}
 
   @Override
-  public void stop(Commands commands, @ReadOnly RobotState state) {
-  }
+  public void stop(Commands commands, @ReadOnly RobotState state) {}
 
   @Override
   public boolean checkIfFinishedEarly(@ReadOnly RobotState state) {

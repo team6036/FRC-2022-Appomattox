@@ -55,7 +55,6 @@ public class AlignController extends Swerve.SwerveController {
         SwerveConstants.kKinematics.toSwerveModuleStates(
             ChassisSpeeds.fromFieldRelativeSpeeds(x, y, z, state.gyroHeading));
     mOutputs.setOutputs(moduleStates);
-    mRumbleOutput =
-        Math.abs(state.targetYawRad) < Math.PI;
+    mRumbleOutput = Math.abs(state.targetYawRad) < Math.PI;
   }
 }

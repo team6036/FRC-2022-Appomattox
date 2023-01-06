@@ -27,8 +27,10 @@ public class RobotState {
   /* Swerve */
   public Rotation2d gyroHeading = new Rotation2d();
   public Rotation2d gyroPitch = new Rotation2d();
+
   public double[] moduleEncoderPos = new double[4];
   public double avgModuleVel;
+
   public SwerveDriveOdometry driveOdometry =
       new SwerveDriveOdometry(SwerveConstants.kKinematics, new Rotation2d(0));
 
@@ -36,6 +38,11 @@ public class RobotState {
   public ChassisSpeeds chassisRelativeSpeeds = new ChassisSpeeds(0, 0, 0);
 
   public TimeInterpolatableBuffer<Pose2d> pastPoses = TimeInterpolatableBuffer.createBuffer(1.0);
+
+  /* Climb */
+  public double rightTick, leftTick;
+  public double rightTickVelo, leftTickVelo;
+  public double rightStatorCurrent, leftStatorCurrent;
 
   /* Positioning Vision */
   public Pose2d virtualGoal =
@@ -97,11 +104,6 @@ public class RobotState {
   /* Auto */
   public PathPlannerTrajectory currentTrajectory;
   public Pose2d initPose = new Pose2d(0, 0, Rotation2d.fromDegrees(-88 + 360));
-
-  /* Climb */
-  public double rightTick, leftTick;
-  public double rightTickVelo, leftTickVelo;
-  public double rightStatorCurrent, leftStatorCurrent;
 
   public DriverStation.Alliance allianceColor;
 }

@@ -69,9 +69,7 @@ public class Shooter extends SubsystemBase {
         break;
       case SHOOT_ON_MOVE:
         double robotToVirtualGoalDist =
-            new Transform2d(state.realPose, state.virtualGoal)
-                .getTranslation()
-                .getNorm();
+            new Transform2d(state.realPose, state.virtualGoal).getTranslation().getNorm();
         SmartDashboard.putNumber("distG", robotToVirtualGoalDist);
 
         mMainwheelOutput.setTargetVelocity(

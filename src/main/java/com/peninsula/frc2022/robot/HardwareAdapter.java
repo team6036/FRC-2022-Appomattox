@@ -20,9 +20,7 @@ import org.photonvision.PhotonCamera;
  */
 public class HardwareAdapter {
 
-  /**
-   * 1 NavX
-   */
+  /** 1 NavX */
   public static class MiscHardware {
     private static MiscHardware sInstance;
     public final AHRS gyro;
@@ -37,9 +35,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 4 Falcon 500s (controlled by Talon FX)
-   */
+  /** 4 Falcon 500s (controlled by Talon FX) */
   public static class SwerveHardware {
 
     private static SwerveHardware sInstance;
@@ -88,9 +84,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 1 CANdle
-   */
+  /** 1 CANdle */
   static class LightingHardware {
 
     private static LightingHardware sInstance;
@@ -107,9 +101,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 3 Falcons for arm + rotation
-   */
+  /** 3 Falcons for arm + rotation */
   static class IntakeHardware {
 
     private static IntakeHardware sInstance;
@@ -160,9 +152,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 3 Falcons for shooter main + hood
-   */
+  /** 3 Falcons for shooter main + hood */
   static class ShooterHardware {
 
     private static ShooterHardware sInstance;
@@ -184,9 +174,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 2 Falcons (one for each arm)
-   */
+  /** 2 Falcons (one for each arm) */
   static class ClimberHardware {
 
     private static ClimberHardware sInstance;
@@ -205,9 +193,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 1 Photon Camera
-   */
+  /** 1 Photon Camera */
   static class VisionHardware {
 
     private static VisionHardware sInstance;
@@ -224,9 +210,7 @@ public class HardwareAdapter {
     }
   }
 
-  /**
-   * 2 Xbox controllers
-   */
+  /** 2 Xbox controllers */
   static class JoystickHardware {
 
     private static JoystickHardware sInstance;

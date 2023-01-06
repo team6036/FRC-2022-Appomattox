@@ -9,9 +9,7 @@ import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import java.util.Set;
 
-/**
- * Resets the drive pose estimate to starting position
- */
+/** Resets the drive pose estimate to starting position */
 public class DriveSetOdometryRoutine extends TimeoutRoutineBase {
 
   public static final double kTimeout = 0.5;

@@ -8,9 +8,7 @@ import com.peninsula.frc2022.robot.RobotState;
 import com.peninsula.frc2022.subsystems.SubsystemBase;
 import java.util.*;
 
-/**
- * Follows a pathplanner trajectory
- */
+/** Follows a pathplanner trajectory */
 public class DrivePathRoutine extends TimeoutRoutineBase {
 
   private PathPlannerTrajectory mPathPlannerTrajectory;

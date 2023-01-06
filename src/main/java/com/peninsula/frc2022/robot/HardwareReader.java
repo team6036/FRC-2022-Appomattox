@@ -57,9 +57,7 @@ public class HardwareReader {
     state.allianceColor = DriverStation.getAlliance();
   }
 
-  /**
-   * Reads the arm position of intake
-   */
+  /** Reads the arm position of intake */
   private void readIntakeState(RobotState state) {
     var hardware = HardwareAdapter.IntakeHardware.getInstance();
     state.intakeArmPosition = hardware.armMotorRight.getSelectedSensorPosition();
@@ -67,10 +65,7 @@ public class HardwareReader {
     SmartDashboard.putNumber("Intake Arm", state.intakeArmPosition);
   }
 
-  /**
-   * Reads swerve module states (8 motors)
-   * Updates odometry + solves virtual goal for SoM
-   */
+  /** Reads swerve module states (8 motors) Updates odometry + solves virtual goal for SoM */
   private void readSwerveState(RobotState state) {
     var hardware = HardwareAdapter.SwerveHardware.getInstance();
     var miscHardware = HardwareAdapter.MiscHardware.getInstance();
@@ -96,12 +91,12 @@ public class HardwareReader {
     moduleStates[3].angle = outputs[3].angle;
     moduleStates[3].speedMetersPerSecond = Math.abs(hardware.modules[3].getDriveVelocity());
 
-    // +x is shooter side, +y is side with PDP
-    state.chassisRelativeSpeeds = SwerveConstants.kKinematics.toChassisSpeeds(moduleStates);
-
     state.gyroHeading = state.gyroHeading.plus(state.initPose.getRotation());
     state.gyroHeading = Rotation2d.fromDegrees((state.gyroHeading.getDegrees() + 720) % 360);
     SmartDashboard.putNumber("angleC", state.gyroHeading.getDegrees());
+
+    // +x is shooter side, +y is side with PDP
+    state.chassisRelativeSpeeds = SwerveConstants.kKinematics.toChassisSpeeds(moduleStates);
 
     // Velocity of robot on the field coordinate system
     state.fieldRelativeSpeeds =
@@ -112,17 +107,21 @@ public class HardwareReader {
                 + state.gyroHeading.getCos() * state.chassisRelativeSpeeds.vyMetersPerSecond,
             state.chassisRelativeSpeeds.omegaRadiansPerSecond);
 
-    state.driveOdometry.update(state.gyroHeading, moduleStates); // On ground
+    state.driveOdometry.update(state.gyroHeading, moduleStates);
     state.odometryDeadReckonUpdateTime = state.gameTimeS;
     state.pastPoses.addSample(
         state.odometryDeadReckonUpdateTime, state.driveOdometry.getPoseMeters());
 
+    virtualGoalUpdater(state);
+  }
+
+  public void virtualGoalUpdater(RobotState state) {
     // virtual goal translation from robot
     Translation2d targetToRobot = state.realPose.minus(VisionConstants.target).getTranslation();
 
     state.shotDistanceCurrent = targetToRobot.getNorm();
 
-    //Moves goal by a solved shot time in the negative velocity direction
+    // Moves goal by a solved shot time in the negative velocity direction
     double shotTime =
         ShootingOnMoveSolver.ToF(
             state.shotDistanceCurrent,
@@ -139,9 +138,7 @@ public class HardwareReader {
             new Transform2d(new Translation2d(xVirtualMove, yVirtualMove), new Rotation2d(0)));
   }
 
-  /**
-   * Reads 2 xbox controllers
-   */
+  /** Reads 2 xbox controllers */
   private void readJoystickState(RobotState state) {
     var hardware = JoystickHardware.getInstance();
 
@@ -178,10 +175,7 @@ public class HardwareReader {
     state.driverBPressed = hardware.driverXboxController.getBButton();
   }
 
-  /**
-   * Reads position of indexer wheel
-   * Reads 3 IR sensors for ball state estimation
-   */
+  /** Reads position of indexer wheel Reads 3 IR sensors for ball state estimation */
   private void readIndexerState(RobotState state) {
     var hardware = HardwareAdapter.IndexerHardware.getInstance();
     state.kickerPosition = hardware.kickerMotor.getSelectedSensorPosition();
@@ -190,9 +184,7 @@ public class HardwareReader {
     state.secondIRBlocked = !hardware.firstPosSensor.get();
   }
 
-  /**
-   * Reads data from photonvision in network tables and performs pose estimation calculations
-   */
+  /** Reads data from photonvision in network tables and performs pose estimation calculations */
   private void readVisionState(RobotState state) {
     var hardware = HardwareAdapter.VisionHardware.getInstance();
     try {
@@ -253,7 +245,7 @@ public class HardwareReader {
 
     Pose2d odomPoseAtSnapshot = state.pastPoses.getSample(state.odometryVisionUpdateTime);
 
-    //Adds delta pose from odometry back to vision truth pose
+    // Adds delta pose from odometry back to vision truth pose
     state.realPose =
         new Pose2d(
             state.lastVisionEstimatedPose.getX()
@@ -265,17 +257,15 @@ public class HardwareReader {
             state.gyroHeading);
   }
 
-  /**
-   * Reads velocity of shooter wheel
-   */
+  /** Reads velocity of shooter wheel */
   private void readShooterState(RobotState state) {
     var hardware = HardwareAdapter.ShooterHardware.getInstance();
     state.mainvel = hardware.shooterMasterMotor.getSelectedSensorVelocity(0) * 600.0 / 2048.0;
   }
 
   /**
-   * Reads velocities, currents and positions of 2 climber arms
-   * Read gyro pitch for the tilt of the robot
+   * Reads velocities, currents and positions of 2 climber arms Read gyro pitch for the tilt of the
+   * robot
    */
   private void readClimberState(RobotState state) {
     var hardware = HardwareAdapter.ClimberHardware.getInstance();
